@@ -19,3 +19,7 @@ Ayaan Ahmad Siddiqui
 ## Today's Progress
 - Worked on improving the project.
 - Updated documentation.
+## Features
+- Browse popular movies
+- Search movies
+- View movie details
