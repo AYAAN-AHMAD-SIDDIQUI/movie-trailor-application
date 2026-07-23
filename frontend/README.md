@@ -22,9 +22,11 @@ Ayaan Ahmad Siddiqui
 ## Features
 - Browse popular movies
 - Search movies
-- View movie details
+- 🎬 Movie search by name
+- View movie details 
 ## 🛠️ Tech Stack
 - React
 - JavaScript
 - TMDB API
 - CSS
+#
