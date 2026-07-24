@@ -29,4 +29,4 @@ Ayaan Ahmad Siddiqui
 - JavaScript
 - TMDB API
 - CSS
-#
+- HTML
