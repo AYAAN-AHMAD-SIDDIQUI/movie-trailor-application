@@ -1,13 +1,29 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import "../css/FreeMovies.css";
 
 const freeMovies = [
+  {
+    id: "TLkA0RELQ1g",
+    title: "Elephants Dream",
+    year: 2006,
+    duration: "11 min",
+    genre: "Animation",
+    language: "English",
+    type: "Open short film",
+    description: "Two characters explore a strange, endless machine in the world's first open movie.",
+    credit: "Blender Foundation",
+    license: "Creative Commons (open movie)",
+    source: "https://orange.blender.org/download/",
+    sourceName: "Official film page"
+  },
   {
     id: "YE7VzlLtp-4",
     title: "Big Buck Bunny",
     year: 2008,
     duration: "10 min",
     genre: "Animation · Comedy",
+    language: "No dialogue",
+    type: "Open short film",
     description: "A gentle giant rabbit has a peaceful day interrupted by three mischievous rodents.",
     credit: "© copyright 2008, Blender Foundation / www.bigbuckbunny.org",
     license: "Creative Commons Attribution 3.0",
@@ -20,6 +36,8 @@ const freeMovies = [
     year: 2010,
     duration: "15 min",
     genre: "Animation · Fantasy",
+    language: "English",
+    type: "Open short film",
     description: "A young woman journeys across a harsh landscape in search of a dragon she once befriended.",
     credit: "© copyright Blender Foundation / durian.blender.org",
     license: "Creative Commons Attribution 3.0",
@@ -31,24 +49,83 @@ const freeMovies = [
     title: "Tears of Steel",
     year: 2012,
     duration: "12 min",
-    genre: "Sci-fi · Live action",
-    description: "A science-fiction short film combining live action and visual effects.",
+    genre: "Sci-fi · Action",
+    language: "English",
+    type: "Open short film",
+    description: "A science-fiction film combining live action and visual effects.",
     credit: "(CC) Blender Foundation / mango.blender.org",
     license: "Creative Commons Attribution 3.0",
     source: "https://mango.blender.org/about/",
     sourceName: "Blender Foundation"
+  },
+  {
+    id: "Y-rmzh0PI3c",
+    title: "Cosmos Laundromat",
+    year: 2015,
+    duration: "12 min",
+    genre: "Animation · Fantasy",
+    language: "English",
+    type: "Open short film",
+    description: "On a desolate island, a sheep meets an unusual salesman who offers him a new life.",
+    credit: "Blender Institute",
+    license: "Open movie · free to share",
+    source: "https://studio.blender.org/projects/cosmos-laundromat/",
+    sourceName: "Official Blender Studio"
   }
 ];
 
+const collections = [
+  {
+    title: "Hindi full movies",
+    tag: "HINDI",
+    description: "Explore free Hindi films published by official studios and rights holders. Availability can change by region.",
+    url: "https://ottasia.com/free/hindi",
+    link: "Browse Hindi movies"
+  },
+  {
+    title: "Classic feature films",
+    tag: "ENGLISH & WORLD CINEMA",
+    description: "Browse classic feature-length films listed as public domain or freely licensed. Copyright rules vary by country.",
+    url: "https://www.filmtheque.com/en/free",
+    link: "Explore classic films"
+  },
+  {
+    title: "More open movies",
+    tag: "BLENDER OPEN MOVIES",
+    description: "Discover more creator-released animated films, sci-fi shorts and behind-the-scenes projects.",
+    url: "https://studio.blender.org/films/",
+    link: "Explore Blender films"
+  }
+];
+
+const genres = ["All", "Animation", "Comedy", "Fantasy", "Sci-fi", "Action"];
+
 function FreeMovies() {
   const [selectedMovie, setSelectedMovie] = useState(freeMovies[0]);
+  const [search, setSearch] = useState("");
+  const [activeGenre, setActiveGenre] = useState("All");
+
+  const filteredMovies = useMemo(() => {
+    const query = search.trim().toLowerCase();
+    return freeMovies.filter((movie) => {
+      const matchesSearch = !query || [movie.title, movie.genre, movie.language, movie.year.toString()]
+        .some((value) => value.toLowerCase().includes(query));
+      const matchesGenre = activeGenre === "All" || movie.genre.toLowerCase().includes(activeGenre.toLowerCase());
+      return matchesSearch && matchesGenre;
+    });
+  }, [search, activeGenre]);
 
   return (
     <div className="free-movies-page">
       <section className="free-movies-hero">
         <span className="free-movies-eyebrow">OPEN CINEMA · FREE TO WATCH</span>
-        <h1>Free <span>Movies</span></h1>
-        <p>Watch a hand-picked collection of openly licensed films. No subscription required.</p>
+        <h1>Your Free <span>Movie Hub</span></h1>
+        <p>Discover open movies, classic cinema and free Hindi movie collections — without a subscription.</p>
+        <div className="free-hero-stats">
+          <span><strong>{freeMovies.length}+</strong> playable open films</span>
+          <span><strong>3</strong> curated movie collections</span>
+          <span><strong>₹0</strong> subscription</span>
+        </div>
       </section>
 
       <section className="free-player-section">
@@ -58,9 +135,8 @@ function FreeMovies() {
             <h2>{selectedMovie.title}</h2>
             <p>{selectedMovie.year} · {selectedMovie.duration} · {selectedMovie.genre}</p>
           </div>
-          <span className="license-pill">FREE · CC LICENSE</span>
+          <span className="license-pill">OPENLY RELEASED</span>
         </div>
-
         <div className="free-video-frame">
           <iframe
             key={selectedMovie.id}
@@ -71,49 +147,76 @@ function FreeMovies() {
             allowFullScreen
           />
         </div>
-
         <div className="free-film-credit">
           <p>{selectedMovie.description}</p>
-          <p><strong>Credit:</strong> {selectedMovie.credit}</p>
-          <p><strong>License:</strong> {selectedMovie.license} · <a href="https://creativecommons.org/licenses/by/3.0/" target="_blank" rel="noreferrer">View license</a></p>
+          <p><strong>Creator:</strong> {selectedMovie.credit}</p>
+          <p><strong>Release:</strong> {selectedMovie.type} · {selectedMovie.language}</p>
+          <p><strong>License:</strong> {selectedMovie.license} · <a href="https://creativecommons.org/licenses/by/3.0/" target="_blank" rel="noreferrer">License information</a></p>
           <p><strong>Original source:</strong> <a href={selectedMovie.source} target="_blank" rel="noreferrer">{selectedMovie.sourceName}</a></p>
+        </div>
+      </section>
+
+      <section className="free-collections-section">
+        <div className="free-section-heading">
+          <div><span className="free-section-kicker">MORE TO EXPLORE</span><h2>Movie collections</h2></div>
+          <p>Full-length catalogues and official sources</p>
+        </div>
+        <div className="free-collection-grid">
+          {collections.map((collection) => (
+            <article className="free-collection-card" key={collection.title}>
+              <span>{collection.tag}</span>
+              <h3>{collection.title}</h3>
+              <p>{collection.description}</p>
+              <a href={collection.url} target="_blank" rel="noreferrer">{collection.link} ↗</a>
+            </article>
+          ))}
         </div>
       </section>
 
       <section className="free-catalog-section">
         <div className="free-catalog-heading">
-          <div>
-            <h2>Explore open movies</h2>
-            <p>Select a title to play it in the player above.</p>
+          <div><span className="free-section-kicker">WATCH INSIDE THE APP</span><h2>Open movie library</h2><p>Choose a film to play it in the player above.</p></div>
+          <span>{filteredMovies.length} of {freeMovies.length} films</span>
+        </div>
+        <div className="free-movie-controls">
+          <input
+            type="search"
+            value={search}
+            onChange={(event) => setSearch(event.target.value)}
+            placeholder="Search movies, genre or year..."
+            aria-label="Search free movies"
+          />
+          <div className="free-genre-filters" aria-label="Filter by genre">
+            {genres.map((genre) => (
+              <button type="button" key={genre} className={activeGenre === genre ? "active" : ""} onClick={() => setActiveGenre(genre)}>{genre}</button>
+            ))}
           </div>
-          <span>{freeMovies.length} films</span>
         </div>
-
-        <div className="free-movie-grid">
-          {freeMovies.map((movie) => (
-            <button
-              type="button"
-              key={movie.id}
-              className={`free-movie-card ${selectedMovie.id === movie.id ? "selected" : ""}`}
-              onClick={() => {
-                setSelectedMovie(movie);
-                window.scrollTo({ top: 0, behavior: "smooth" });
-              }}
-            >
-              <div className="free-movie-art">
-                <span>▶</span>
-                <small>OPEN MOVIE</small>
-              </div>
-              <div className="free-movie-card-info">
-                <h3>{movie.title}</h3>
-                <p>{movie.year} · {movie.duration}</p>
-                <span>{movie.genre}</span>
-              </div>
-            </button>
-          ))}
-        </div>
+        {filteredMovies.length ? (
+          <div className="free-movie-grid">
+            {filteredMovies.map((movie) => (
+              <button
+                type="button"
+                key={movie.id}
+                className={`free-movie-card ${selectedMovie.id === movie.id ? "selected" : ""}`}
+                onClick={() => {
+                  setSelectedMovie(movie);
+                  window.scrollTo({ top: 0, behavior: "smooth" });
+                }}
+              >
+                <div className="free-movie-art"><span>▶</span><small>PLAY OPEN MOVIE</small></div>
+                <div className="free-movie-card-info">
+                  <h3>{movie.title}</h3>
+                  <p>{movie.year} · {movie.duration} · {movie.language}</p>
+                  <span>{movie.genre}</span>
+                </div>
+              </button>
+            ))}
+          </div>
+        ) : <p className="free-empty-state">No movies match that search. Try another title or genre.</p>}
       </section>
-      <p className="free-movies-note">These are openly licensed short films, not a catalog of current commercial releases. Videos play through the official Blender Foundation YouTube uploads; each film's license and creator credit are shown above.</p>
+
+      <p className="free-movies-note">This page embeds creator-released open films. The external collections are independent catalogues and may have regional restrictions or different copyright rules. Always use the rights-holder's official upload; availability can change.</p>
     </div>
   );
 }
