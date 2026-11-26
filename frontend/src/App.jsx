@@ -1,6 +1,7 @@
 import "./css/App.css";
 import Favorites from "./pages/Favorites";
 import Home from "./pages/Home";
+import FreeMovies from "./pages/FreeMovies";
 import { Routes, Route } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import { MovieProvider } from "./context/MovieContext";
@@ -11,6 +12,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/favorites" element={<Favorites />} />
+          <Route path="/free-movies" element={<FreeMovies />} />
         </Routes>
       </main></MovieProvider>
      
