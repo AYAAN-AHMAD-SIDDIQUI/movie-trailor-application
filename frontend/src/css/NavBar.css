@@ -1,47 +1,63 @@
-navbar {
-  background-color: #000000;
-  padding: 1rem 2rem;
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  width: 100%;
+  padding: 1rem clamp(1rem, 4vw, 4rem);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  gap: 1rem;
+  background: rgba(9, 9, 13, 0.82);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(18px);
 }
 
-.navbar-brand {
-  font-size: 1.5rem;
-  font-weight: bold;
+.navbar-brand a {
+  display: inline-flex;
+  align-items: center;
+  gap: .65rem;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: -.7px;
 }
 
-.navbar-links {
-  display: flex;
-  gap: 2rem;
+.navbar-brand a::before {
+  content: '▶';
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 11px;
+  color: white;
+  font-size: .8rem;
+  background: linear-gradient(135deg, #ff303b, #a9000a);
+  box-shadow: 0 5px 22px rgba(229, 9, 20, .3);
 }
+
+.navbar-links { display: flex; align-items: center; gap: .55rem; }
 
 .nav-link {
-  font-size: 1rem;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  transition: background-color 0.2s;
+  padding: .65rem 1rem;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  color: #b7b7c0;
+  font-size: .92rem;
+  font-weight: 600;
+  transition: .2s ease;
 }
 
-.nav-link:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+.nav-link:hover, .nav-link.active {
+  color: #fff;
+  background: rgba(255, 255, 255, .08);
+  border-color: rgba(255, 255, 255, .1);
 }
 
-@media (max-width: 768px) {
-  .navbar {
-    padding: 1rem;
-  }
-
-  .navbar-brand {
-    font-size: 1.2rem;
-  }
-
-  .navbar-links {
-    gap: 1rem;
-  }
-
-  .nav-link {
-    padding: 0.5rem;
-  }
+@media (max-width: 520px) {
+  .navbar { padding: .85rem 1rem; }
+  .navbar-brand a { font-size: 1.12rem; }
+  .navbar-brand a::before { width: 30px; height: 30px; }
+  .navbar-links { gap: .2rem; }
+  .nav-link { padding: .55rem .7rem; font-size: .82rem; }
 }
