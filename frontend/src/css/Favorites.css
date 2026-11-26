@@ -1,51 +1,49 @@
-favorites {
-  padding: 2rem;
+.favorites {
   width: 100%;
-  box-sizing: border-box;
+  padding: 2.5rem 0;
 }
 
 .favorites h2 {
-  margin-bottom: 2rem;
-  text-align: center;
-  font-size: 2.5rem;
-  color: #ffffff;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  margin: 0 0 1.8rem;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  letter-spacing: -1px;
 }
 
 .favorites-empty {
+  max-width: 620px;
+  margin: 4rem auto;
+  padding: 3.5rem 2rem;
   text-align: center;
-  padding: 4rem 2rem;
-  background-color: rgba(255, 255, 255, 0.05);
-  border-radius: 12px;
-  margin: 2rem auto;
-  max-width: 600px;
+  border: 1px solid rgba(255,255,255,.09);
+  border-radius: 22px;
+  background: linear-gradient(145deg, rgba(255,255,255,.055), rgba(255,255,255,.018));
+  box-shadow: 0 20px 60px rgba(0,0,0,.22);
 }
 
 .favorites-empty h2 {
-  margin-bottom: 1rem;
-  font-size: 2rem;
-  color: #e50914;
+  margin: 0 0 .8rem;
+  color: #fff;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.8rem;
 }
 
 .favorites-empty p {
-  color: #999;
-  font-size: 1.2rem;
-  line-height: 1.6;
+  max-width: 420px;
+  margin: 0 auto;
+  color: #a1a1aa;
+  font-size: 1rem;
+  line-height: 1.7;
 }
 
-
-/* Animation for new favorites being added */
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-.movies-grid > * {
-  animation: fadeIn 0.3s ease-out forwards;
+.movies-grid > * { animation: fadeIn .35s ease-out both; }
+
+@media (max-width: 640px) {
+  .favorites { padding-top: 1.5rem; }
+  .favorites-empty { margin: 2rem auto; padding: 2.5rem 1.2rem; }
 }
