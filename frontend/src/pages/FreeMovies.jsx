@@ -76,25 +76,25 @@ const freeMovies = [
 
 const collections = [
   {
-    title: "Hindi full movies",
-    tag: "HINDI",
-    description: "Explore free Hindi films published by official studios and rights holders. Availability can change by region.",
-    url: "https://ottasia.com/free/hindi",
-    link: "Browse Hindi movies"
-  },
-  {
-    title: "Classic feature films",
-    tag: "ENGLISH & WORLD CINEMA",
-    description: "Browse classic feature-length films listed as public domain or freely licensed. Copyright rules vary by country.",
-    url: "https://www.filmtheque.com/en/free",
-    link: "Explore classic films"
-  },
-  {
-    title: "More open movies",
-    tag: "BLENDER OPEN MOVIES",
-    description: "Discover more creator-released animated films, sci-fi shorts and behind-the-scenes projects.",
+    title: "Blender Studio Open Films",
+    tag: "OFFICIAL · OPEN MOVIES",
+    description: "Explore creator-released animation, sci-fi, comedy and fantasy shorts from Blender Studio.",
     url: "https://studio.blender.org/films/",
-    link: "Explore Blender films"
+    link: "Browse official films"
+  },
+  {
+    title: "Open Movie Downloads",
+    tag: "OFFICIAL · FREE",
+    description: "Find official film pages, credits and downloads for Blender Foundation open movie projects.",
+    url: "https://www.blender.org/about/projects/",
+    link: "Explore Blender projects"
+  },
+  {
+    title: "Public Domain Film Archive",
+    tag: "CHECK RIGHTS BY TITLE",
+    description: "Browse historical film records and verify each title's public-domain status before watching or reusing it.",
+    url: "https://commons.wikimedia.org/wiki/Category:Films",
+    link: "Browse film archive"
   }
 ];
 
