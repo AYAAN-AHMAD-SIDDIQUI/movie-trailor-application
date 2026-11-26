@@ -1,4 +1,4 @@
-movie-card {
+.movie-card {
   position: relative;
   border-radius: 8px;
   overflow: hidden;
@@ -121,7 +121,9 @@ movie-card {
     height: 32px;
     font-size: 1.2rem;
   }
-  .favorite-button {
+}
+
+.favorite-button {
   background: none;
   border: none;
   font-size: 1.5rem;
@@ -214,5 +216,4 @@ movie-card {
   font-size: 16px;
   cursor: pointer;
   z-index: 1001;
-}
 }
